@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     argm.printhelp();
     return 1;
   }
-  string username, tags, url, val;
+  string username, tags, url, val, email;
   // init
   if (argm.check_params(po_wrapper::OP_INIT)) 
   {   
@@ -36,13 +36,16 @@ int main(int argc, char *argv[])
     argm.get(po_wrapper::OP_USERNAME, username);
     argm.get(po_wrapper::OP_TAGS, tags);
     argm.get(po_wrapper::OP_URL, url);
+    argm.get(po_wrapper::OP_EMAIL, email);
 
     if(!username.empty())      
-        r.add_prop(prop_type::username, username);
+      r.add_prop(prop_type::username, username);
     if(!tags.empty()) 
-        r.add_prop(prop_type::tags, tags);
+      r.add_prop(prop_type::tags, tags);
     if(!url.empty())
-        r.add_prop(prop_type::url, url);
+      r.add_prop(prop_type::url, url);
+    if(!email.empty())
+      r.add_prop(prop_type::email, email);
       
     store_t store;    
     local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F)); // it won't decrypt if key is different

@@ -17,6 +17,7 @@ const string po_wrapper::OP_USERNAME = "username";
 const string po_wrapper::OP_KEYWORD = "keyword";
 const string po_wrapper::OP_SHOW = "show";
 const string po_wrapper::OP_HISTORY = "history";
+const string po_wrapper::OP_EMAIL = "email";
 
 string po_wrapper::get(string name) 
 {  
@@ -55,10 +56,10 @@ void po_wrapper::handle_po(int argc, char *argv[])
     (OP_USERNAME.c_str(), opt::value<string>(), "The user name associated with the password (value param), example: jonh.doe@gmail.com")
     (OP_TAGS.c_str(), opt::value<string>(), "coma separated tags, example: personal, email")
     (OP_URL.c_str(), opt::value<string>(), "an Url, example: https://gmail.com")
+    (OP_EMAIL.c_str(), opt::value<string>(), "set the email of the account")
     (OP_KEYWORD.c_str(), opt::value<string>(), "a text to find inside our secure storage")
-    (OP_SHOW.c_str(), " show the actual password")
-    (OP_HISTORY.c_str(), " shows history")
-    ;
+    (OP_SHOW.c_str(), "show the actual password")
+    (OP_HISTORY.c_str(), "shows history"); 
   opt::store(opt::parse_command_line(argc, argv, *desc), vm);
   opt::notify(vm);
 }

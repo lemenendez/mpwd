@@ -26,10 +26,11 @@ class po_wrapper
     static const std::string OP_TAGS;
     static const std::string OP_URL;
     static const std::string OP_KEYWORD;
+    static const std::string OP_EMAIL;
     static const std::string OP_SHOW;
     static const std::string OP_HISTORY;
   private:
-    const std::string default_db_name ="~/.sec-db";
+    const std::string default_db_name =".sec-db";
     opt::options_description *desc;
     opt::variables_map vm;
     void handle_po(int, char *[]);    

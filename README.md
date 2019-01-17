@@ -51,25 +51,25 @@ It add or update a account.
 Example 1: Stores (add if doesn't exist) the entry identified by *gmail* with the password *my_gmail_insecure_pass*
 
 ```shell
-mpwd.app -p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_gmail_insecure_pass
+mpwd.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_gmail_insecure_pass
 ```
 
 Example 2: Stores (add if doesn't exist) the entry identified by *gmail* with the password *my_insecure_password* with the property username with *john.doe@gmail.com*
 
 ```shell
-mpdw.app -p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com
+mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com
 ```
 
 Example 3: Stores (add if doesn't exist) the entry identified by *gmail* with the password *my_insecure_password* with the property username with *john.doe@gmail.com* and the property tags with *email,personal*
 
 ```shell
-mpdw.app -p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal
+mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal
 ```
 
 Example 4: Stores (add if doesn't exist) the entry identified by *gmail* with the password *my_insecure_password* with the property username with *john.doe@gmail.com* and the property *tags* with *email,personal* and the propery *url* with *https://gmail.com*
 
 ```shell
-mpdw.sec -p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com
+mpdw.sec --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com
 ```
 
 ### Search
@@ -87,11 +87,11 @@ It searchs into the datatabase and shows the actual password if the paramater *s
 Example 1: Searchs for the keyword gmail
 
 ```shell
-mpwd.app --search -p InsecureParagrahaOnlyForDevTest12345$$ --keyword gmail
+mpwd.app --search --p InsecureParagrahaOnlyForDevTest12345$$ --keyword gmail
 ```
 
 Example 2: Searches for the keyword gmail and shows the actuall password and history of changes
 
 ```shell
-mpwd.app --search -p InsecureParagrahaOnlyForDevTest12345$$ --keyword gmail --show --history
+mpwd.app --search --p InsecureParagrahaOnlyForDevTest12345$$ --keyword gmail --show --history
 ```
