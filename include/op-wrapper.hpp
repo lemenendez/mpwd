@@ -29,6 +29,8 @@ class po_wrapper
     static const std::string OP_EMAIL;
     static const std::string OP_SHOW;
     static const std::string OP_HISTORY;
+    static const std::string OP_LIST;
+    static const std::string OP_VERSION;
   private:
     const std::string default_db_name =".sec-db";
     opt::options_description *desc;
