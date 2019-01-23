@@ -46,7 +46,7 @@ void local_storage::read(store_t& s, const string paraphrase, const string filen
 }
 
 void local_storage::save(const store_t& s, const string filename, Encode encode, Encrypt encrypt)
-{
+{  
   if(encode==Encode::None && encrypt==Encrypt::None) 
   {
       ofstream out;

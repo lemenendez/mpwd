@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   if(argm.has(po_wrapper::OP_HELP)) 
   {
     argm.printhelp();
-    return 1;
+    return 0;
   }
   string username, tags, url, val, email;
   // init
@@ -60,6 +60,19 @@ int main(int argc, char *argv[])
     store_t store;
     local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F));
     store.search(argm.get(po_wrapper::OP_KEYWORD), argm.has(po_wrapper::OP_SHOW), argm.has(po_wrapper::OP_HISTORY));
+    return 0;
+  }
+
+  if(argm.check_params(po_wrapper::OP_LIST)) {
+    store_t store;    
+    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F));
+    cout << "keys["<<  store.count() <<"]:" << endl;
+    store.list();
+    return 0;
+  }
+
+  if(argm.check_params(po_wrapper::OP_VERSION)) {
+    cout << "mpwd version:"  << store_t::VERSION_STR << std::endl;
     return 0;
   }
   

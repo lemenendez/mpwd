@@ -140,8 +140,8 @@ class row_t
 class store_t
 {  
   int _version_number;
-  string _mpwd_version;  
-  string _paraphrase;  
+  string _mpwd_version;
+  string _paraphrase;
   map<string, row_t> _vals;
   friend class boost::serialization::access;
 
@@ -157,16 +157,20 @@ class store_t
 
   public:
     store_t(){};    // serialization stuff
-    store_t(string p): _paraphrase {p}  { _mpwd_version="0.0.1"; _version_number = 1;}; // assert strong pwd validator
+    store_t(string);     
     void add(string, string); // simple keyval    
     void add(string, row_t);
     void add(list<row_t>);
     void update(string,row_t);
     void init(string);
     void show(string,bool history=false,bool pwd=false);
+    void list();
     string paraphrase() const;
     void search(string, bool show_secure=false, bool history=false);
     size_t count() const;
+    static const size_t MIN_PARAPHRASE;
+    static const int VERSION_NUMBER;
+    static const string VERSION_STR;
 };
 
 static string typeToString(prop_type t) 

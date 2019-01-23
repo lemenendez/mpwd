@@ -27,6 +27,10 @@ std::ostream& operator << (std::ostream &os, const row_t& p)
 
 using namespace mpwd::core::store;
 
+const int store_t::VERSION_NUMBER = 2;
+const string store_t::VERSION_STR = "0.0.2";
+const size_t store_t::MIN_PARAPHRASE = sizeof(char) * 30;
+
 prop_t::prop_t(prop_type t, string val)
 {
   if(t==prop_type::other)
@@ -102,8 +106,6 @@ void row_t::val(const string newval)
   _val.push_back({id, std::string{newval}});  // push to back
 };
 
-
-
 void row_t::print_changes(bool show_pwd) 
 {
   cout << "\t" << "Properties:" << endl;; 
@@ -170,6 +172,15 @@ void row_t::update_prop(const string name, const string value)
     throw invalid_argument("property doesn't exist");
 }
 
+store_t::store_t(string p) 
+{ 
+  // cout << "calling constructor"<< endl;
+  if(p.size()< MIN_PARAPHRASE) 
+     throw "invalid paraphase size"; 
+  _paraphrase =  p;
+  // cout << "exit constructor" << endl;
+}
+
 bool store_t::get(string key) 
 {  
   for(auto v:_vals)
@@ -187,7 +198,7 @@ void store_t::add(string key, row_t r)
   if(!get(key)) 
   {
     _vals[key] = r;
-  }
+  } 
 }
 
 string store_t::paraphrase() const
@@ -255,7 +266,13 @@ void store_t::search(string keyword, bool show_secure, bool history)
   cout << "total:" << i << endl;
 }
 
-size_t store_t::count() const{
+void store_t::list() {
+  for(auto r:_vals) {
+    show(r.first, false, false);
+  }
+}
+
+size_t store_t::count() const {
   return _vals.size();
 }
 

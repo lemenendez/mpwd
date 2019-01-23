@@ -44,4 +44,7 @@ $(BIN)/$(STORAGE_O): $(INC)/$(STORAGE_H) $(STORAGE_CPP)
 $(BIN)/$(OP_O): $(INC)/$(OP_H) $(OP_CPP)
 	$(CC) -I$(INC) $(OP_CPP) -c -o $(BIN)/$(OP_O)
 
+.PHONY: clean
+clean:
+	rm $(BIN)/$(MAIN_O) $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O)
 
