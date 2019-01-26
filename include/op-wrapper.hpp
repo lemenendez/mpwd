@@ -6,6 +6,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <core-storage.hpp>
+
 namespace opt = boost::program_options;
 
 namespace mpwd {
@@ -31,8 +33,12 @@ class po_wrapper
     static const std::string OP_HISTORY;
     static const std::string OP_LIST;
     static const std::string OP_VERSION;
+    static const std::string OP_ENCRYPT;
+    static const std::string OP_ENCODING;
   private:
     const std::string default_db_name =".sec-db";
+    const std::string default_encrypt = "salsa2";
+    const std::string default_encoding = "none";
     opt::options_description *desc;
     opt::variables_map vm;
     void handle_po(int, char *[]);    
@@ -43,6 +49,8 @@ class po_wrapper
     void get(std::string, std::string &);
     std::string get(std::string);
     bool check_params(const std::string);
+    mpwd::core::tools::Encrypt getEncrypt();
+    mpwd::core::tools::Encode getEncoding();
 };
 
 }}

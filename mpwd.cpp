@@ -17,11 +17,12 @@ int main(int argc, char *argv[])
     return 0;
   }
   string username, tags, url, val, email;
+
   // init
   if (argm.check_params(po_wrapper::OP_INIT)) 
   {   
     store_t store(argm.get(po_wrapper::OP_P));
-    local_storage::save(store,argm.get(po_wrapper::OP_F));
+    local_storage::save(store,argm.get(po_wrapper::OP_F), argm.getEncoding(), argm.getEncrypt());
     return 0;
   }
   // save
@@ -48,9 +49,9 @@ int main(int argc, char *argv[])
       r.add_prop(prop_type::email, email);
       
     store_t store;    
-    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F)); // it won't decrypt if key is different
+    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F), argm.getEncoding(), argm.getEncrypt()); // it won't decrypt if key is different
     store.update(argm.get(po_wrapper::OP_KEY), r);
-    local_storage::save(store, argm.get(po_wrapper::OP_F));  
+    local_storage::save(store, argm.get(po_wrapper::OP_F), argm.getEncoding(), argm.getEncrypt());  
     return 0;
   }
 
@@ -58,14 +59,14 @@ int main(int argc, char *argv[])
   if (argm.check_params(po_wrapper::OP_SEARCH))
   {    
     store_t store;
-    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F));
+    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F), argm.getEncoding(), argm.getEncrypt());
     store.search(argm.get(po_wrapper::OP_KEYWORD), argm.has(po_wrapper::OP_SHOW), argm.has(po_wrapper::OP_HISTORY));
     return 0;
   }
 
   if(argm.check_params(po_wrapper::OP_LIST)) {
     store_t store;    
-    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F));
+    local_storage::read(store, argm.get(po_wrapper::OP_P), argm.get(po_wrapper::OP_F), argm.getEncoding(), argm.getEncrypt());
     cout << "keys["<<  store.count() <<"]:" << endl;
     store.list();
     return 0;
