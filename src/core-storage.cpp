@@ -1,5 +1,5 @@
 #include "core-store.hpp"
-#include "include/core-storage.hpp"
+#include "core-storage.hpp"
 
 #include <fstream>    // ifstream, ofstream
 #include <sstream>      // ostringstream
