@@ -95,3 +95,13 @@ Example 2: Searches for the keyword gmail and shows the actuall password and his
 ```shell
 mpwd.app --search --p InsecureParagrahaOnlyForDevTest12345$$ --keyword gmail --show --history
 ```
+
+Example 3: run the file _dummy_db.sh
+
+```shell
+./_dummy_db.sh
+```
+
+It creates a dummy database with debugging options: --encoding none --encrypt none
+It creates 4 unique entries: JibJab, github, npm, and paypal.
+You can open the file VERY_INSECURE_DB with the seralized objects.
