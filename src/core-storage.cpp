@@ -8,16 +8,62 @@
 #include "salsa.h"
 #include "files.h"
 #include "osrng.h"    // SHA256
+
+// start base 64 headers
+#include <boost/archive/iterators/binary_from_base64.hpp>
+#include <boost/archive/iterators/base64_from_binary.hpp>
+#include <boost/archive/iterators/transform_width.hpp>
+#include <boost/algorithm/string.hpp>
+// end base 64 headers
+
 // #include "files.h"
 // #include "hex.h"
 // #include "base64.h"
+using namespace CryptoPP;
+using namespace boost::archive::iterators;
 
 using namespace mpwd::core::store;
 using namespace mpwd::core::tools;
-using namespace CryptoPP;
+
+string local_storage::decode64(const std::string &val) 
+{
+  using It = transform_width<binary_from_base64<std::string::const_iterator>, 8, 6>;
+  return boost::algorithm::trim_right_copy_if(std::string(It(std::begin(val)), It(std::end(val))), [](char c) {
+        return c == '\0';
+    });
+}
+
+string local_storage::encode64(const std::string &val) 
+{
+    using It = base64_from_binary<transform_width<std::string::const_iterator, 6, 8>>;
+    auto tmp = std::string(It(std::begin(val)), It(std::end(val)));
+    return tmp.append((3 - val.size() % 3) % 3, '=');
+}
+
 
 void local_storage::read(store_t& s, const string paraphrase, const string filename, Encode encode, Encrypt encrypt)
 {  
+  if(encode==Encode::Base64 && encrypt==Encrypt::None) 
+  {
+    // 1 read from the file
+    ifstream ifs(filename);
+    if(ifs.is_open())
+    {
+        // 2 decoded the file from base64
+        stringstream buffer;
+        buffer << ifs.rdbuf();
+        // string decoded = decode64(buffer.str());
+        buffer.str(decode64(buffer.str()));
+        // 3 read file
+        text_iarchive ia(buffer);
+        ia >> s;
+    }
+    
+  }
+  if(encode==Encode::Base64 && encrypt==Encrypt::Salsa2) 
+  {
+    
+  }
   if(encode==Encode::None && encrypt==Encrypt::None) 
   {
     ifstream ifs(filename);
@@ -47,6 +93,26 @@ void local_storage::read(store_t& s, const string paraphrase, const string filen
 
 void local_storage::save(const store_t& s, const string filename, Encode encode, Encrypt encrypt)
 {  
+  if(encode==Encode::Base64 && encrypt==Encrypt::None) 
+  {
+    stringstream buffer;
+    ofstream out;
+    out.open(filename.c_str(), std::ios::out); // opening for write and text mode
+    if(out.is_open()) 
+    {
+      text_oarchive oa{buffer};      
+      oa << s;
+      // text is in the buffer
+      out << encode64(buffer.str());
+      out.close();
+    }
+    else
+      throw "Error opening file";
+  }
+  if(encode==Encode::Base64 && encrypt==Encrypt::Salsa2) 
+  {
+    
+  }
   if(encode==Encode::None && encrypt==Encrypt::None) 
   {
       ofstream out;

@@ -83,11 +83,12 @@ bool po_wrapper::check_params(const std::string param)
   std::invalid_argument("invalid param combination see help");
 }
 
-mpwd::core::tools::Encrypt po_wrapper::getEncrypt() {
+mpwd::core::tools::Encrypt po_wrapper::getEncrypt() 
+{
   mpwd::core::tools::Encrypt encrypt_val;
   std::string encrypt;
-  if (has(OP_ENCODING)) {
-    get(OP_ENCODING, encrypt);
+  if (has(OP_ENCRYPT)) {
+    get(OP_ENCRYPT, encrypt);
     if(encrypt=="none")
       encrypt_val = mpwd::core::tools::Encrypt::None;
     else if(encrypt=="salsa2")
@@ -99,7 +100,8 @@ mpwd::core::tools::Encrypt po_wrapper::getEncrypt() {
   return mpwd::core::tools::Encrypt::Salsa2;
 }
 
-mpwd::core::tools::Encode po_wrapper::getEncoding() {
+mpwd::core::tools::Encode po_wrapper::getEncoding() 
+{
   mpwd::core::tools::Encode encoding_val;
   std::string encoding;
   if(has(OP_ENCODING)) {

@@ -5,7 +5,7 @@ BIN = bin
 BOOST = /home/dev/blogs/c++/boost/boost_1_68_0/build
 BOOST_INC = -I$(BOOST)/include
 BOOST_LIB = -L$(BOOST)/lib
-BOOST_LIBS = -lboost_program_options -lboost_system -lboost_serialization
+BOOST_LIBS = -lboost_program_options -lboost_system -lboost_serialization -lboost_serialization
 
 # CRYPTOPP
 CRYPTOPP = /home/dev/blogs/c++/cryptopp-CRYPTOPP_7_0_0

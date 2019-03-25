@@ -19,7 +19,9 @@ namespace tools {
       static void read(store_t& s, const string paraphrase, const string filename, Encode encode=Encode::None, Encrypt encrypt=Encrypt::Salsa2);
       static void save(const store_t& s, const string filename, Encode encode=Encode::None, Encrypt encrypt=Encrypt::Salsa2);
       static bool file_exists(const string);
-  };
+      static string decode64(const string &);
+      static string encode64(const string &);
+  }; 
 
 }}}
 
