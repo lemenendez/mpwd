@@ -69,8 +69,16 @@ mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_
 Example 4: Stores (add if doesn't exist) the entry identified by *gmail* with the password *my_insecure_password* with the property username with *john.doe@gmail.com* and the property *tags* with *email,personal* and the propery *url* with *https://gmail.com*
 
 ```shell
-mpdw.sec --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com
+mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com
 ```
+
+Example 5: Store data using base64 encoding. The program option is *encoding*, the options are: None (default), Url (not supported), and Base64
+
+```shell
+mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com --encoding base64 --encrypt salsa2
+```
+
+Check _dummy_db_base64.sh for more examples
 
 ### Search
 

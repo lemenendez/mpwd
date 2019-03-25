@@ -3,7 +3,7 @@ export LD_LIBRARY_PATH=/home/dev/blogs/c++/boost/boost_1_68_0/build/lib
 PROGRAM="./bin/mpwd.app"
 FILE="VERY_INSECURE_DB"
 PWD="DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD"
-DEBUG="--encoding none --encrypt salsa2"
+DEBUG="--encoding base64 --encrypt salsa2"
 USERNAME="jdoe"
 EMAIL="john@doe.com"
 $PROGRAM --init --f $FILE --p $PWD $DEBUG   # init
