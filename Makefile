@@ -5,7 +5,7 @@ BIN = bin
 BOOST = /home/dev/blogs/c++/boost/boost_1_68_0/build
 BOOST_INC = -I$(BOOST)/include
 BOOST_LIB = -L$(BOOST)/lib
-BOOST_LIBS = -lboost_program_options -lboost_system -lboost_serialization -lboost_serialization
+BOOST_LIBS = -lboost_program_options -lboost_system -lboost_serialization
 
 # CRYPTOPP
 CRYPTOPP = /home/dev/blogs/c++/cryptopp-CRYPTOPP_7_0_0
@@ -33,7 +33,7 @@ SRC = src
 TESTS = tests
 TEST_O = test.out
 
-$(BIN)/$(MAIN_O): $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(SRC)/$(MAIN_CPP)
+$(BIN)/$(MAIN_O): $(BIN)/$(OP_O) $(BIN)/$(STORE_O) $(BIN)/$(STORAGE_O) $(SRC)/$(MAIN_CPP)
 	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BOOST_LIB) $(BOOST_LIBS) $(CRYPTOPP_LIB) $(CRYPTOPP_LIBS) $(SRC)/$(MAIN_CPP) -o $(BIN)/$(MAIN_O) -std=c++11
 
 $(BIN)/$(STORE_O): $(INC)/$(STORE_H) $(SRC)/$(STORE_CPP)

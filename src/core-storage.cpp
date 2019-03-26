@@ -161,6 +161,12 @@ void local_storage::save(const store_t &s, const string filename, Encode encode,
     oa << s;
     StringSource s(m_stream.str(), true, new StreamTransformationFilter(enc, new FileSink(filename.c_str())));
   }
+  if (encode == Encode::None && encrypt == Encrypt::None)
+  {
+    ofstream ofs(filename);
+    text_oarchive oa{ofs};
+    oa << s;
+  }
 }
 
 bool local_storage::file_exists(const string filename)

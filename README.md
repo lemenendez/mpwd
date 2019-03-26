@@ -112,12 +112,34 @@ The parameters *encrypt* and *encoding* canbe used independly to debug the mpwd
 Options for encoding are: none (default), url (not supported), and base64
 Options for encrypt are: none (debug) and salsa2
 
-### Debuggin Examples
+### Debugging Example
+
+When working with the code use the *encrypt* parameter with the value *none*:
 
 ```shell
-mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com --encoding base64 --encrypt salsa2
+./bin/mpwd.app --init --f VERY_INSECURE_DB --p DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD --encoding none --encrypt none
 ```
 
-If you open the file you will see a base64 string.
+The file content is:
+
+```shell
+22 serialization::archive 17 0 0 0  -374564288 89 DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD 0 0 0 0
+```
+
+All the content is produced by the serialization system *boost*
 
 Note: encoding and encrypt should be set when init, otherwise mpwd will throw an error.
+
+## Testing
+
+All the test are in the folder *tests*, to compile the test use the command:
+
+```shell
+make build-test
+```
+
+To run all the test use the command:
+
+```shell
+make test
+```
