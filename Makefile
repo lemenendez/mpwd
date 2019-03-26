@@ -30,6 +30,9 @@ MAIN_CPP = mpwd.cpp
 MAIN_O = mpwd.app
 SRC = src
 
+TESTS = tests
+TEST_O = test.out
+
 $(BIN)/$(MAIN_O): $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(SRC)/$(MAIN_CPP)
 	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BOOST_LIB) $(BOOST_LIBS) $(CRYPTOPP_LIB) $(CRYPTOPP_LIBS) $(SRC)/$(MAIN_CPP) -o $(BIN)/$(MAIN_O) -std=c++11
 
@@ -42,7 +45,13 @@ $(BIN)/$(STORAGE_O): $(INC)/$(STORAGE_H) $(SRC)/$(STORAGE_CPP)
 $(BIN)/$(OP_O): $(INC)/$(OP_H) $(SRC)/$(OP_CPP)
 	$(CC) -I$(INC) $(SRC)/$(OP_CPP) -c -o $(BIN)/$(OP_O)
 
-.PHONY: clean
+.PHONY: clean, test, build-test
 clean:
-	rm $(BIN)/$(MAIN_O) $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O)
+	rm $(BIN)/$(MAIN_O) $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BIN)/$(TEST_O)
+
+test:
+	$(BIN)/$(TEST_O)
+
+build-test:
+	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(TESTS)/test_all.cpp $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BOOST_LIB) $(BOOST_LIBS) $(CRYPTOPP_LIB) $(CRYPTOPP_LIBS) -o $(BIN)/$(TEST_O)
 

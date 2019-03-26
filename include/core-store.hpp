@@ -93,6 +93,7 @@ class prop_t
     string name() const; 
     void val(const string); 
     void print_changes();
+    size_t changes_count() const;
 
     friend std::ostream& operator << (std::ostream &os, const prop_t&);
 

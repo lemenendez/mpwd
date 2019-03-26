@@ -89,6 +89,11 @@ void prop_t::print_changes()
   }
 }
 
+size_t prop_t::changes_count() const
+{
+  return _h.size();
+}
+
 //// start row_t methods
 row_t::row_t(string v) {   
   _val.push_back({0,{v}});

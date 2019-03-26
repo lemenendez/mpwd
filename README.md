@@ -1,23 +1,21 @@
 # My PassWorD management  ( mpwd)
 
-A tool for maintain secure passwords. Secure account information like email and users. 
-Database is protected with a paraphrase, the paragraph must be at least 30 characters long. Encrypts the storage. 
-Done in modern C++, boost and CryptoPP.  Every password is identified by a key, the key must be unique.
+A tool for maintain secure passwords. Secure account information like email and users. Database is protected with a paraphrase, the paragraph must be at least 30 characters long. Encrypts the storage. Done in modern C++, boost and CryptoPP.  Every password is identified by a key, the key must be unique.
 
 ## Usage
 
-mpwd has a console interface.
+mpwd has a console interface: *mpwd.app*, the console app provides several commands: Init, Save, and Search.
 
 ### Init
 
-The first step to securely store password is to initialize the data secure-storage (database)
+The first step to securely store passwords is to initialize the data secure-storage.
 
-#### Parameters
+#### Init Parameters
 
 1. --p \<paraphrase\>
 2. --f \<filename\>  (OPTIONAL)
 
-#### Examples
+#### Init Examples
 
 Example 1: Initialize a secure database using a paraphrase without specifyng the filename
 
@@ -35,7 +33,7 @@ mpwd.app --init --p Th1sAppIsAsS3cur3AsStrongIsYourParagr@ph -f /home/john/.secu
 
 It add or update a account.
 
-#### Parameters
+#### Save Parameters
 
 1. --key \<unique_id\>
 2. --val \<your_secret\>
@@ -46,7 +44,7 @@ It add or update a account.
 7. --p \<paragraph\>
 8. --f \<filename\>
 
-#### Examples
+#### Save Examples
 
 Example 1: Stores (add if doesn't exist) the entry identified by *gmail* with the password *my_gmail_insecure_pass*
 
@@ -72,25 +70,19 @@ Example 4: Stores (add if doesn't exist) the entry identified by *gmail* with th
 mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com
 ```
 
-Example 5: Store data using base64 encoding. The program option is *encoding*, the options are: None (default), Url (not supported), and Base64
-
-```shell
-mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com --encoding base64 --encrypt salsa2
-```
-
 Check _dummy_db_base64.sh for more examples
 
 ### Search
 
 It searchs into the datatabase and shows the actual password if the paramater *show* is especified, also shows the history of changes if the parameter *history* is specified.
 
-#### parameters
+#### Search Parameters
 
 1. --keyword \<search_keywrod\>
 2. --show
 3. --history
 
-#### Examples
+#### Search Examples
 
 Example 1: Searchs for the keyword gmail
 
@@ -113,3 +105,19 @@ Example 3: run the file _dummy_db.sh
 It creates a dummy database with debugging options: --encoding none --encrypt none
 It creates 4 unique entries: JibJab, github, npm, and paypal.
 You can open the file VERY_INSECURE_DB with the seralized objects.
+
+## Debugging
+
+The parameters *encrypt* and *encoding* canbe used independly to debug the mpwd
+Options for encoding are: none (default), url (not supported), and base64
+Options for encrypt are: none (debug) and salsa2
+
+### Debuggin Examples
+
+```shell
+mpdw.app --p InsecureParagrahaOnlyForDevTest12345$$ --save --key gmail --val my_insecure_password --username john.doe@gmail.com --tags email,personal --url https://gmail.com --encoding base64 --encrypt salsa2
+```
+
+If you open the file you will see a base64 string.
+
+Note: encoding and encrypt should be set when init, otherwise mpwd will throw an error.
