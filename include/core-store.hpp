@@ -32,7 +32,7 @@ class trackable
   friend class boost::serialization::access;  // serialization stuff
   public:
     T _val;
-    trackable(){};
+    trackable(){_id=0;};
     trackable(unsigned i): _id { i } { start();};
     trackable(unsigned i, T tracked): _id {i}, _val{tracked} { start();}
     template <typename Archive> void serialize(Archive &ar, const unsigned int)   { ar & _id; ar & _created; ar & _accessed;  ar & _val;  };    
@@ -55,7 +55,8 @@ struct prop_t_h
   string _type_name;
   string _val; 
   prop_t_h(){c_name();}
-  prop_t_h(prop_type _t, string _tn, string _v):_type{_t},_type_name{_tn},_val{_v} { c_name(); }
+  prop_t_h(prop_type _t, string _tn, string _v):_type{_t},_type_name{_tn},_val{_v} { c_name(); } // this should not be allowed, backward compatibility
+  prop_t_h(prop_type _t, string _v):_type{_t}, _val{_v} { c_name(); }
   private:  
     friend class boost::serialization::access; 
     void serialize(text_iarchive &ar, const unsigned int) { ar & _type; ar & _val; c_name();};
@@ -93,6 +94,7 @@ class prop_t
     string name() const; 
     void val(const string); 
     void print_changes();
+    void print_back();
     size_t changes_count() const;
 
     friend std::ostream& operator << (std::ostream &os, const prop_t&);
@@ -100,7 +102,7 @@ class prop_t
     bool operator==(const prop_t&);
     bool operator!=(const prop_t&);
 
-    prop_t& operator=(prop_t& other) { _h = other._h; return *this; }
+    prop_t& operator=(prop_t& other) { _h = other._h; return *this; }    
     
 };
 

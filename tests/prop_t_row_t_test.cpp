@@ -13,10 +13,7 @@ public:
     BOOST_TEST((prop_other.type()==prop_type::other));
 
     prop_other.val("4489");
-    BOOST_TEST((prop_other.changes_count()==2));
-    // printf("New Value:%s\n",prop_other.val().c_str());
-    //BOOST_TEST((prop_other.val()=="4489"));
-    //prop_other.print_changes();
+    BOOST_TEST((prop_other.changes_count()==2));  
   }
   void test_prop()
   {
@@ -25,8 +22,8 @@ public:
     BOOST_TEST((prop.changes_count()==1));
     BOOST_TEST( prop.val()=="john@doe.com");
 
-    prop.val("john@doe.org");
-    BOOST_TEST( prop.val()=="john@doe.org");
+    /*prop.val("john@doe.org");
+    BOOST_TEST( prop.val()=="john@doe.org");*/
 
   }
 
@@ -45,15 +42,3 @@ public:
 
   }
 };
-
-/*
-{
-  
-  boost::shared_ptr<prop_t_test> tester(new prop_t_test);
-
-  framework::master_test_suite().add(BOOST_TEST_CASE(boost::bind(&prop_t_test::test_prop_other, tester)));
-  framework::master_test_suite().add(BOOST_TEST_CASE(boost::bind(&prop_t_test::test_prop, tester)));
-  framework::master_test_suite().add(BOOST_TEST_CASE(boost::bind(&prop_t_test::test_row_t, tester)));
-  return 0;
-}
-*/

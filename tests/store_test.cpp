@@ -21,13 +21,6 @@ public:
     store_t t("myuglyandinseureparaphrase_myuglyandinseureparaphrase");
     local_storage::save(t, "test_file", Encode::Base64, Encrypt::Salsa2);
     BOOST_TEST(local_storage::file_exists("test_file"));
-
-    // std::ifstream test_file("test_file");
-    // std::stringstream buffer;
-    // buffer << test_file.rdbuf();
-    // cout << buffer.str()<<"\n";
-    //printf("%s",buffer.str().c_str());
-    // BOOST_TEST((buffer.str() == ""));
   }
 
   void test_store_keys()
@@ -35,7 +28,6 @@ public:
     store_t t("myuglyandinseureparaphrase_myuglyandinseureparaphrase");
     local_storage::save(t, "test_file", Encode::Base64, Encrypt::Salsa2);
     BOOST_TEST(local_storage::file_exists("test_file"));
-
   }
   
 };

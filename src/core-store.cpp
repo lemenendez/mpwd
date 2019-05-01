@@ -52,20 +52,20 @@ bool operator!=(const prop_t&a, const prop_t&b){ return !(a==b);}
 
 prop_type prop_t::type() const  {
   if(_h.empty()) throw "no property set";
-  const_cast<prop_t*>(this)->_h.front().seen(); // ugly  
-  return _h.front()._val._type;
+  const_cast<prop_t*>(this)->_h.back().seen(); // ugly  
+  return _h.back()._val._type;
 }
 
 string prop_t::val() const  {
   if(_h.empty()) throw "no property set";
-  const_cast<prop_t*>(this)->_h.front().seen(); // ugly
-  return _h.front()._val._val;
+  const_cast<prop_t*>(this)->_h.back().seen(); // ugly
+  return _h.back()._val._val;
 }
 
 string prop_t::name() const  {
   if(_h.empty()) throw "no property set";
-  const_cast<prop_t*>(this)->_h.front().seen(); // ugly
-  return _h.front()._val._type_name;
+  const_cast<prop_t*>(this)->_h.back().seen(); // ugly
+  return _h.back()._val._type_name;
 }
 
 void prop_t::val(const string newval) 
@@ -75,9 +75,10 @@ void prop_t::val(const string newval)
     throw "max limit reached";
   unsigned id = static_cast<unsigned>(_h.size());
   trackable<prop_t_h> new_r { id };  
-  new_r._val._type = _h.front()._val._type;
-  new_r._val._type_name.assign(_h.front()._val._type_name);
+  new_r._val._type = _h.back()._val._type;
+  new_r._val._type_name.assign(_h.back()._val._type_name);
   new_r._val._val.assign(newval);
+  
   _h.push_back(new_r);
 }
 
@@ -87,6 +88,13 @@ void prop_t::print_changes()
   {
     cout << "\t\tId:" << v.Id() << " Accessed:" << v.toString(v.Accessed()) << " Created:" << v.toString(v.Created()) <<" Name:" <<  v._val._type_name << " Value:"<< v._val._val << endl;
   }
+}
+
+void prop_t::print_back() 
+{
+  if(_h.empty()) throw "no property set"; 
+  cout << " Name:" << _h.back()._val._val;
+  cout << " Type:" << _h.back()._val._type_name << "\n";  
 }
 
 size_t prop_t::changes_count() const

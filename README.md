@@ -143,3 +143,14 @@ To run all the test use the command:
 ```shell
 make test
 ```
+
+## Docker
+
+Clone de repository, then go to the mpwd folder and then build new image
+
+```shell
+git clone https://github.com/lemenendez/mpwd.git
+cd mpwd
+docker build -t mpwd .
+docker run mpwd -d -v /home/YOURUSER/mpwd:/usr/src 
+```
