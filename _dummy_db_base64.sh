@@ -1,5 +1,5 @@
 #!/bin/bash
-export LD_LIBRARY_PATH=/home/dev/blogs/c++/boost/boost_1_68_0/build/lib
+export LD_LIBRARY_PATH=/usr/boost/boost_1_68_0/build/lib
 PROGRAM="./bin/mpwd.app"
 FILE="VERY_INSECURE_DB"
 PWD="DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD_DUMMY_PASSWORD"

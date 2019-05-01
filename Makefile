@@ -2,13 +2,13 @@ CC = g++
 BIN = bin
 
 # BOOST
-BOOST = /home/dev/blogs/c++/boost/boost_1_68_0/build
+BOOST = /usr/boost/boost_1_68_0/build
 BOOST_INC = -I$(BOOST)/include
 BOOST_LIB = -L$(BOOST)/lib
 BOOST_LIBS = -lboost_program_options -lboost_system -lboost_serialization
 
 # CRYPTOPP
-CRYPTOPP = /home/dev/blogs/c++/cryptopp-CRYPTOPP_7_0_0
+CRYPTOPP = /usr/cryptopp/700
 CRYPTOPP_INC = -I$(CRYPTOPP)
 CRYPTOPP_LIB = -L$(CRYPTOPP)
 CRYPTOPP_LIBS = -lcryptopp
@@ -37,13 +37,13 @@ $(BIN)/$(MAIN_O): $(BIN)/$(OP_O) $(BIN)/$(STORE_O) $(BIN)/$(STORAGE_O) $(SRC)/$(
 	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(BIN)/$(OP_O) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BOOST_LIB) $(BOOST_LIBS) $(CRYPTOPP_LIB) $(CRYPTOPP_LIBS) $(SRC)/$(MAIN_CPP) -o $(BIN)/$(MAIN_O) -std=c++11
 
 $(BIN)/$(STORE_O): $(INC)/$(STORE_H) $(SRC)/$(STORE_CPP)
-	$(CC) -I$(INC) $(SRC)/$(STORE_CPP) -c -o $(BIN)/$(STORE_O)
+	$(CC) -I$(INC) $(BOOST_INC) $(SRC)/$(STORE_CPP) -c -o $(BIN)/$(STORE_O)
 
 $(BIN)/$(STORAGE_O): $(INC)/$(STORAGE_H) $(SRC)/$(STORAGE_CPP)
-	$(CC) -I$(INC) $(CRYPTOPP_INC) $(SRC)/$(STORAGE_CPP) -c -o $(BIN)/$(STORAGE_O)
+	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(SRC)/$(STORAGE_CPP) -c -o $(BIN)/$(STORAGE_O)
 
 $(BIN)/$(OP_O): $(INC)/$(OP_H) $(SRC)/$(OP_CPP)
-	$(CC) -I$(INC) $(SRC)/$(OP_CPP) -c -o $(BIN)/$(OP_O)
+	$(CC) -I$(INC) $(BOOST_INC) $(SRC)/$(OP_CPP) -c -o $(BIN)/$(OP_O)
 
 .PHONY: clean, test, build-test
 clean:
@@ -53,5 +53,5 @@ test:
 	$(BIN)/$(TEST_O)
 
 build-test:
-	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(TESTS)/test_all.cpp $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BOOST_LIB) $(BOOST_LIBS) $(CRYPTOPP_LIB) $(CRYPTOPP_LIBS) -o $(BIN)/$(TEST_O)
+	$(CC) -I$(INC) $(BOOST_INC) $(CRYPTOPP_INC) $(BIN)/$(STORAGE_O) $(BIN)/$(STORE_O) $(BOOST_LIB) $(BOOST_LIBS) $(CRYPTOPP_LIB) $(CRYPTOPP_LIBS) $(TESTS)/test_all.cpp -o $(BIN)/$(TEST_O)
 
