@@ -1,6 +1,6 @@
-# My PassWorD management  ( mpwd)
+# My PassWorD ( mpwd)
 
-A tool for maintain secure passwords. Secure account information like email and users. Database is protected with a paraphrase, the paragraph must be at least 30 characters long. Encrypts the storage. Done in modern C++, boost and CryptoPP.  Every password is identified by a key, the key must be unique.
+A tool for keeping secure passwords. The database is protected with a paraphrase -at least 30 characters long- It encrypts the storage. Done in modern C++, boost and CryptoPP.  Every password is identified by a unique key.
 
 ## Usage
 
